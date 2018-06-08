@@ -1,25 +1,52 @@
 const fs = require('fs')
+const path = require('path')
 const csv = require('csv')
+const jsonfile = require('jsonfile')
+const writeYamlFile = require('write-yaml-file')
 
-const path = 'file.csv'
+module.exports = {
 
-if (fs.existsSync(path)) {
-  fs.readFile(path, (err, data) => {
-    if (err) throw err
-    csv.parse(data, (err, data) => {
+  parse ({ input, output, startRow, startCol, saveAsYAML }) {
+
+    if (!input) throw 'Missing parameter options.input !'
+
+    if (!fs.existsSync(input)) throw `File not found: ${input}`
+
+    csv.parse(fs.readFileSync(input), (err, data) => {
       if (err) throw err
-      let locales = {}
-      // 遍历列（语言）
-      for (let i = 3; i < data[0].length; i++) {
-        const lang = data[0][i]
-        locales[lang] = {}
-        // 遍历行（文本键值对）
-        for (let j = 1; j < data.length; j++) {
-          const key = data[j][0]
-          locales[lang][key] = data[j][i]
+
+      const countRows = data.length
+      const countCols = data[0].length
+      const i18nData = {}
+
+      for (let col = startCol ? startCol - 1 : 1; col < countCols; col++) {
+        const lang = data[0][col]
+        const list = {}
+        for (let row = startRow ? startRow - 1 : 1; row < countRows; row++) {
+          const key = data[row][0]
+          list[key] = data[row][col]
+        }
+        i18nData[lang] = list
+      }
+
+      if (output) {
+        !fs.existsSync(output) && fs.mkdirSync(output)
+        if (saveAsYAML) {
+          for (lang in i18nData) {
+            const filePath = path.join(output, lang + '.json')
+            jsonfile.writeFileSync(filePath, i18nData[lang], { spaces: 2 })
+          }
+        } else {
+          for (lang in i18nData) {
+            const filePath = path.join(output, lang + '.yml')
+            writeYamlFile.sync(filePath, i18nData[lang])
+          }
         }
       }
-      console.log(locales)
+
+      return i18nData
     })
-  })
+
+  }
+
 }

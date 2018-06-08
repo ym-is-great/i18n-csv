@@ -1,5 +1,5 @@
 {
-  "name": "i18n-csv2json",
+  "name": "i18n-csv",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,8 @@
   "author": "ymcn <yatmingtsai@foxmail.com>",
   "license": "ISC",
   "dependencies": {
-    "csv": "^3.1.0"
+    "csv": "^3.1.0",
+    "jsonfile": "^4.0.0",
+    "write-yaml-file": "^1.0.1"
   }
 }
