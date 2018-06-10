@@ -122,7 +122,7 @@ format:  JSON
 }
 ```
 
-使用 `saveAdYAML=true` 可以输出更简洁、易于修改的 YAML 格式：
+使用 `saveAsYAML=true` 可以输出更简洁、易于修改的 YAML 格式：
 
 ```js
 i18nCSV.parse({
@@ -132,7 +132,7 @@ i18nCSV.parse({
 })
 ```
 
-生成的 `.yml` 文件内容：
+生成的 `en.yml` 文件内容：
 
 ```yaml
 # path/to/output/en.yml
