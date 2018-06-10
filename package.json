@@ -1,6 +1,6 @@
 {
   "name": "i18n-csv",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Convert multi-language csv to JSON and YAML.",
   "main": "index.js",
   "scripts": {
