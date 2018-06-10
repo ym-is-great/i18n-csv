@@ -1,16 +1,18 @@
 {
   "name": "i18n-csv",
   "version": "1.0.0",
-  "description": "",
+  "description": "Convert multi-language csv to JSON and YAML.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "ymcn <yatmingtsai@foxmail.com>",
+  "author": "CAI YI MING <hi@caiyiming.com> (https://yiming.blog)",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^2.4.1",
     "csv-parse": "^2.4.1",
     "jsonfile": "^4.0.0",
+    "npm": "^6.1.0",
     "write-yaml-file": "^1.0.1"
   }
 }
