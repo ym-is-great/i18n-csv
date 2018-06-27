@@ -21,6 +21,7 @@ const getLang = function (colHeader) {
 }
 
 const handleText = function (key, string, tasks = []) {
+  string = string.replace(/[\r\n]/g, '')
   tasks.forEach(item => {
     if (!item[2] || item[2] === key) string = string.replace(item[0], item[1])
   })
@@ -53,7 +54,7 @@ module.exports = {
       const list = {}
       for (let row = startRow !== undefined ? startRow - 1 : 1; row < countRows; row++) {
         const key = data[row][0]
-        list[key] = data[row][col] // handleText(key, data[row][col], replace)
+        list[key] = handleText(key, data[row][col], replace)
       }
       i18nData[lang] = list
     }
